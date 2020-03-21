@@ -7,4 +7,9 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
 scalaVersion := "2.13.1"
 
-libraryDependencies += guice
+libraryDependencies ++= Seq(
+  "com.google" % "guice" % "3.5.4",
+  "org.mybatis"    % "mybatis" % "5.4.10.Final",
+  jdbc,
+  evolutions
+)
