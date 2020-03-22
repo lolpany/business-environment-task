@@ -11,5 +11,6 @@ libraryDependencies ++= Seq(
   "com.google" % "guice" % "3.5.4",
   "org.mybatis"    % "mybatis" % "5.4.10.Final",
   jdbc,
-  evolutions
+  evolutions,
+  "com.h2database" % "h2" % "1.4.200"
 )
