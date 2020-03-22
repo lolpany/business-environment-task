@@ -3,9 +3,10 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
-GET    /explore                     controllers.HomeController.explore
-GET    /tutorial                    controllers.HomeController.tutorial
+POST    /api/v1.0/shop_positions/create    controllers.ShopPositionController.create
+GET     /api/v1.0/shop_positions/read/:id     controllers.ShopPositionController.read(id:long)
+POST    /api/v1.0/shop_positions/add/:id     controllers.ShopPositionController.update
+POST    /api/v1.0/shop_positions/delete/:id     controllers.ShopPositionController.delete
 
 
 # Map static resources from the /public folder to the /assets URL path

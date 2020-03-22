@@ -13,6 +13,7 @@
         <entry key="root">
           <value>
             <ProjectSettingsEntry>
+              <option name="sourceDir" value="R:\business-environment-task\app" />
               <option name="confDir" value="R:\business-environment-task\app" />
               <option name="templateImports">
                 <list>
