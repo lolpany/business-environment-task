@@ -1,6 +1,8 @@
 package controllers;
 
 import db.DbExecutionContext;
+import models.AutoModel;
+import models.AutoModelMapper;
 import models.ShopPosition;
 import models.ShopPositionMapper;
 import org.apache.ibatis.session.SqlSession;
@@ -15,8 +17,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
-import java.util.concurrent.Executor;
-import java.util.function.Supplier;
 
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 
@@ -35,16 +35,14 @@ public class ShopPositionController extends Controller {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
-    @BodyParser.Of(BodyParser.Json.class)
     public CompletionStage<Result> create(Http.Request request) {
-        Optional<ShopPosition> person = request.body().parseJson(ShopPosition.class);
-        ShopPosition shopPosition = person.orElse(null);
+        ShopPosition shopPosition = request.body().parseJson(ShopPosition.class).orElse(null);
         if (shopPosition != null) {
             return supplyAsync(() -> {
                 try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-                    sqlSession.getMapper(ShopPositionMapper.class).insert(person.get());
+                    sqlSession.getMapper(ShopPositionMapper.class).insert(shopPosition);
                     sqlSession.commit();
-                    return person.get().getId();
+                    return shopPosition.getId();
                 }
             }, dbExecutionContext)
                     .thenApplyAsync(sequence -> ok(Long.toString(sequence)), httpExecutionContext);
@@ -59,15 +57,20 @@ public class ShopPositionController extends Controller {
                 .thenApplyAsync(shopPosition -> ok(Json.toJson(shopPosition)), httpExecutionContext);
     }
 
-    public Result update(Http.Request request) {
-        return ok(Json.toJson(2));
+    public CompletionStage<Result> update(Http.Request request) {
+        ShopPosition shopPosition = request.body().parseJson(ShopPosition.class).orElse(null);
+        return supplyAsync(() -> sqlSessionFactory.openSession().getMapper(ShopPositionMapper.class)
+                .update(shopPosition), dbExecutionContext)
+                .thenApplyAsync(count -> count == 1 ? ok() : status(404), httpExecutionContext);
     }
 
-    public Result delete(Long id) {
-        return ok(Json.toJson(2));
+    public CompletionStage<Result> delete(Long id) {
+        return supplyAsync(() -> sqlSessionFactory.openSession().getMapper(ShopPositionMapper.class)
+                .delete(id), dbExecutionContext)
+                .thenApplyAsync(count -> count == 1 ? ok() : status(404), httpExecutionContext);
     }
 
-    public Result search() {
-        return ok(Json.toJson(2));
+    public CompletionStage<Result> search() {
+        return null;
     }
 }

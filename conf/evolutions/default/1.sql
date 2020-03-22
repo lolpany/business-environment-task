@@ -22,7 +22,9 @@ CREATE TABLE shop_position (
                            year_of_production INT NOT NULL,
                            mileage DOUBLE NOT NULL,
                            price DECIMAL NOT NULL,
-                           PRIMARY KEY (id)
+                           PRIMARY KEY (id),
+                           foreign key (mark_id) references auto_mark(id),
+                           foreign key (model_id) references auto_model(id)
 );
 
 -- !Downs

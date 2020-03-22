@@ -18,19 +18,19 @@ public class ShopPosition {
         this.id = id;
     }
 
-    public long getMark() {
+    public long getMarkId() {
         return markId;
     }
 
-    public void setMark(long markId) {
+    public void setMarkId(long markId) {
         this.markId = markId;
     }
 
-    public long getModel() {
+    public long getModelId() {
         return modelId;
     }
 
-    public void setModel(long modelId) {
+    public void setModelId(long modelId) {
         this.modelId = modelId;
     }
 

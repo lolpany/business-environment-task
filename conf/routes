@@ -3,6 +3,17 @@
 # ~~~~
 
 # An example controller showing a sample home page
+
+POST    /api/v1.0/auto_mark/create    controllers.AutoMarkController.create(request:Request)
+GET     /api/v1.0/auto_mark/read/:id     controllers.AutoMarkController.read(id:Long)
+POST    /api/v1.0/auto_mark/update     controllers.AutoMarkController.update(request:Request)
+POST    /api/v1.0/auto_mark/delete/:id     controllers.AutoMarkController.delete(id:Long)
+
+POST    /api/v1.0/auto_model/create    controllers.AutoModelController.create(request:Request)
+GET     /api/v1.0/auto_model/read/:id     controllers.AutoModelController.read(id:Long)
+POST    /api/v1.0/auto_model/update     controllers.AutoModelController.update(request:Request)
+POST    /api/v1.0/auto_model/delete/:id     controllers.AutoModelController.delete(id:Long)
+
 POST    /api/v1.0/shop_positions/create    controllers.ShopPositionController.create(request:Request)
 GET     /api/v1.0/shop_positions/read/:id     controllers.ShopPositionController.read(id:Long)
 POST    /api/v1.0/shop_positions/update     controllers.ShopPositionController.update(request:Request)
