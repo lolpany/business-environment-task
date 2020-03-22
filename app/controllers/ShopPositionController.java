@@ -3,6 +3,7 @@ package controllers;
 import db.DbExecutionContext;
 import models.ShopPosition;
 import models.ShopPositionMapper;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import play.libs.Json;
 import play.mvc.BodyParser;
@@ -15,6 +16,7 @@ import javax.inject.Singleton;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executor;
+import java.util.function.Supplier;
 
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 
@@ -38,8 +40,13 @@ public class ShopPositionController extends Controller {
         Optional<ShopPosition> person = request.body().parseJson(ShopPosition.class);
         ShopPosition shopPosition = person.orElse(null);
         if (shopPosition != null) {
-            return supplyAsync(() -> sqlSessionFactory.openSession().getMapper(ShopPositionMapper.class)
-                    .insert(person.get()), dbExecutionContext)
+            return supplyAsync(() -> {
+                try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+                    sqlSession.getMapper(ShopPositionMapper.class).insert(person.get());
+                    sqlSession.commit();
+                    return person.get().getId();
+                }
+            }, dbExecutionContext)
                     .thenApplyAsync(sequence -> ok(Long.toString(sequence)), httpExecutionContext);
         } else {
             return supplyAsync(() -> status(404), httpExecutionContext);
