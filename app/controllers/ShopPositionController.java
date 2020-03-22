@@ -25,9 +25,9 @@ import static play.mvc.Results.status;
 @Singleton
 public class ShopPositionController extends Controller {
 
-    HttpExecutionContext httpExecutionContext;
-    DbExecutionContext dbExecutionContext;
-    SqlSessionFactory sqlSessionFactory;
+    private HttpExecutionContext httpExecutionContext;
+    private DbExecutionContext dbExecutionContext;
+    private SqlSessionFactory sqlSessionFactory;
 
     @Inject
     public ShopPositionController(HttpExecutionContext httpExecutionContext, DbExecutionContext dbExecutionContext,
@@ -49,8 +49,10 @@ public class ShopPositionController extends Controller {
         }
     }
 
-    public Result read(long id) {
-        return ok(Json.toJson(2));
+    public CompletionStage<Result> read(long id) {
+        return supplyAsync(() -> sqlSessionFactory.openSession().getMapper(ShopPositionMapper.class)
+                .select(id), dbExecutionContext)
+                .thenApplyAsync(shopPosition -> ok(Json.toJson(shopPosition)), (Executor) httpExecutionContext);
     }
 
     public Result update() {
