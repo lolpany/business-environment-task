@@ -5,22 +5,18 @@ import models.ShopPosition;
 import models.ShopPositionMapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import play.libs.Json;
-import play.libs.concurrent.HttpExecutionContext;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executor;
-import java.util.function.Function;
 
 import static java.util.concurrent.CompletableFuture.supplyAsync;
-import static play.mvc.Results.ok;
-import static play.mvc.Results.status;
 
 @Singleton
 public class ShopPositionController extends Controller {
@@ -37,29 +33,30 @@ public class ShopPositionController extends Controller {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
+    @BodyParser.Of(BodyParser.Json.class)
     public CompletionStage<Result> create(Http.Request request) {
         Optional<ShopPosition> person = request.body().parseJson(ShopPosition.class);
         ShopPosition shopPosition = person.orElse(null);
         if (shopPosition != null) {
             return supplyAsync(() -> sqlSessionFactory.openSession().getMapper(ShopPositionMapper.class)
                     .insert(person.get()), dbExecutionContext)
-                    .thenApplyAsync(count -> count == 1 ? ok() : status(404), (Executor) httpExecutionContext);
+                    .thenApplyAsync(sequence -> ok(Long.toString(sequence)), httpExecutionContext);
         } else {
-            return supplyAsync(() -> status(404), (Executor) httpExecutionContext);
+            return supplyAsync(() -> status(404), httpExecutionContext);
         }
     }
 
-    public CompletionStage<Result> read(long id) {
+    public CompletionStage<Result> read(Long id) {
         return supplyAsync(() -> sqlSessionFactory.openSession().getMapper(ShopPositionMapper.class)
                 .select(id), dbExecutionContext)
-                .thenApplyAsync(shopPosition -> ok(Json.toJson(shopPosition)), (Executor) httpExecutionContext);
+                .thenApplyAsync(shopPosition -> ok(Json.toJson(shopPosition)), httpExecutionContext);
     }
 
-    public Result update() {
+    public Result update(Http.Request request) {
         return ok(Json.toJson(2));
     }
 
-    public Result delete() {
+    public Result delete(Long id) {
         return ok(Json.toJson(2));
     }
 

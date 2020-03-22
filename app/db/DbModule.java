@@ -12,7 +12,7 @@ public class DbModule extends AbstractModule {
     protected void configure() {
         try {
             bind(SqlSessionFactory.class).toInstance(new SqlSessionFactoryBuilder()
-                    .build(Resources.getResourceAsStream("mybatis-config.xml")));
+                    .build(Resources.getResourceAsStream("shop.xml")));
         } catch (IOException e) {
             // todo logging
             e.printStackTrace();

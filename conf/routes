@@ -3,10 +3,10 @@
 # ~~~~
 
 # An example controller showing a sample home page
-POST    /api/v1.0/shop_positions/create    controllers.ShopPositionController.create
-GET     /api/v1.0/shop_positions/read/:id     controllers.ShopPositionController.read(id:long)
-POST    /api/v1.0/shop_positions/add/:id     controllers.ShopPositionController.update
-POST    /api/v1.0/shop_positions/delete/:id     controllers.ShopPositionController.delete
+POST    /api/v1.0/shop_positions/create    controllers.ShopPositionController.create(request:Request)
+GET     /api/v1.0/shop_positions/read/:id     controllers.ShopPositionController.read(id:Long)
+POST    /api/v1.0/shop_positions/update     controllers.ShopPositionController.update(request:Request)
+POST    /api/v1.0/shop_positions/delete/:id     controllers.ShopPositionController.delete(id:Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

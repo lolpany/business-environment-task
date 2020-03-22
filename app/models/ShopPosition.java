@@ -1,12 +1,14 @@
 package models;
 
+import java.math.BigDecimal;
+
 public class ShopPosition {
     long id;
-    AutoMark mark;
-    AutoModel model;
+    long markId;
+    long modelId;
     int yearOfProduction;
     double mileage;
-    double price;
+    BigDecimal price;
 
     public long getId() {
         return id;
@@ -16,20 +18,20 @@ public class ShopPosition {
         this.id = id;
     }
 
-    public AutoMark getMark() {
-        return mark;
+    public long getMark() {
+        return markId;
     }
 
-    public void setMark(AutoMark mark) {
-        this.mark = mark;
+    public void setMark(long markId) {
+        this.markId = markId;
     }
 
-    public AutoModel getModel() {
-        return model;
+    public long getModel() {
+        return modelId;
     }
 
-    public void setModel(AutoModel model) {
-        this.model = model;
+    public void setModel(long modelId) {
+        this.modelId = modelId;
     }
 
     public int getYearOfProduction() {
@@ -48,11 +50,11 @@ public class ShopPosition {
         this.mileage = mileage;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }
