@@ -1,0 +1,136 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+http://localhost:9000/api/v1.0/shop_positions/read/1
+Content-Type: application/json
+
+<> 2020-03-23T022017.200.json
+<> 2020-03-23T021824.200.json
+<> 2020-03-23T021638.200.json
+<> 2020-03-23T021635.200.json
+<> 2020-03-23T021632.200.json
+<> 2020-03-23T021627.200.json
+<> 2020-03-23T021128.200.json
+<> 2020-03-23T021112.200.json
+<> 2020-03-23T021058.200.json
+<> 2020-03-23T021038.200.json
+<> 2020-03-23T021034.200.json
+<> 2020-03-23T021030.200.json
+<> 2020-03-23T021025.200.json
+<> 2020-03-23T021022.200.json
+<> 2020-03-23T021018.200.json
+<> 2020-03-23T021014.200.json
+<> 2020-03-23T020956.200.json
+<> 2020-03-23T123715.200.json
+
+###
+
+POST http://localhost:9000/api/v1.0/auto_mark/create
+Content-Type: application/json
+
+{
+  "name": "mersedes",
+  "country": "Germany"
+}
+
+<> 2020-03-23T041328.200.txt
+<> 2020-03-23T041127.200.txt
+<> 2020-03-23T022005.200.txt
+<> 2020-03-23T021613.200.txt
+<> 2020-03-23T021607.200.txt
+<> 2020-03-23T021101.200.txt
+<> 2020-03-23T020754.200.txt
+<> 2020-03-23T020633.200.txt
+<> 2020-03-23T020448.200.txt
+<> 2020-03-23T020445.200.txt
+<> 2020-03-23T013510.404.html
+
+###
+
+POST http://localhost:9000/api/v1.0/auto_model/create
+Content-Type: application/json
+
+{
+  "name": "s60",
+  "productionStartYear": 2005,
+  "productionEndYear": 2015
+}
+
+<> 2020-03-23T041330.200.txt
+<> 2020-03-23T041133.200.txt
+<> 2020-03-23T022007.200.txt
+<> 2020-03-23T021618.200.txt
+<> 2020-03-23T021104.200.txt
+<> 2020-03-23T020942.200.txt
+<> 2020-03-23T020635.500.html
+<> 2020-03-23T020542.500.html
+
+###
+
+POST http://localhost:9000/api/v1.0/shop_positions/create
+Content-Type: application/json
+
+{
+  "id": 1,
+  "markId": 1,
+  "modelId": 1,
+  "yearOfProduction": 2015,
+  "mileage": 222,
+  "price": 444
+}
+
+<> 2020-03-23T041332.200.txt
+<> 2020-03-23T041136.200.txt
+<> 2020-03-23T022012.200.txt
+<> 2020-03-23T021814.200.txt
+<> 2020-03-23T021620.200.txt
+<> 2020-03-23T021601.500.html
+<> 2020-03-23T021225.200.txt
+<> 2020-03-23T021214.200.txt
+<> 2020-03-23T021124.200.txt
+<> 2020-03-23T021108.200.txt
+<> 2020-03-23T020947.200.txt
+<> 2020-03-23T020945.200.txt
+<> 2020-03-23T020756.500.html
+<> 2020-03-23T020504.500.html
+<> 2020-03-23T123939.200.txt
+
+###
+
+POST http://localhost:9000/api/v1.0/shop_positions/search
+Content-Type: application/json
+
+{
+  "markName": "merd",
+  "modelName": "",
+  "yearOfProductionFrom": 1,
+  "yearOfProductionTo": 2015,
+  "mileageFrom": 0,
+  "mileageTo": 2015,
+  "priceFrom": 0,
+  "priceTo": 444,
+  "paging": {"from": 0, "limit":  10}
+}
+
+<> 2020-03-23T041343.200.json
+<> 2020-03-23T041336.200.json
+<> 2020-03-23T041139.500.html
+<> 2020-03-23T041103.200.json
+<> 2020-03-23T040925.500.html
+<> 2020-03-23T032735.500.html
+<> 2020-03-23T031008.500.html
+<> 2020-03-23T030728.500.html
+<> 2020-03-23T030626.500.html
+<> 2020-03-23T030541.500.html
+<> 2020-03-23T030418.500.html
+<> 2020-03-23T030229.500.html
+<> 2020-03-23T030147.500.html
+<> 2020-03-23T025930.500.html
+<> 2020-03-23T025814.500.html
+<> 2020-03-23T025534.500.html
+<> 2020-03-23T025351.500.html
+
+###
