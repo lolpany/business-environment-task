@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ShopPosition">
+    <select id="searchPosition" resultType="map"><![CDATA[
+        select *
+        from shop_position
+        left join auto_mark on shop_position.mark_id = auto_mark.id
+        left join auto_model on shop_position.model_id = auto_model.id
+        where auto_mark.name like concat('%',#{markName},'%')
+            and auto_model.name like concat('%',#{modelName},'%')
+            and shop_position.year_of_production >= #{yearOfProductionFrom}
+            and shop_position.year_of_production <= #{yearOfProductionTo}
+            and shop_position.mileage >= #{mileageFrom}
+            and shop_position.mileage <= #{mileageTo}
+            and shop_position.price >= #{priceFrom}
+            and shop_position.price <= #{priceTo}
+            ]]>
+    </select>
+</mapper>

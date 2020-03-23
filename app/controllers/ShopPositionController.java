@@ -5,6 +5,7 @@ import models.AutoModel;
 import models.AutoModelMapper;
 import models.ShopPosition;
 import models.ShopPositionMapper;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import play.libs.Json;
@@ -70,7 +71,11 @@ public class ShopPositionController extends Controller {
                 .thenApplyAsync(count -> count == 1 ? ok() : status(404), httpExecutionContext);
     }
 
-    public CompletionStage<Result> search() {
-        return null;
+    public CompletionStage<Result> search(Http.Request request) {
+        ShopPositionSearchCriteria criteria = request.body().parseJson(ShopPositionSearchCriteria.class).orElse(null);
+        return supplyAsync(() -> sqlSessionFactory.openSession().selectList("searchPosition",
+                criteria, new RowBounds(criteria.paging.from, criteria.paging.limit)),
+                dbExecutionContext)
+                .thenApplyAsync(positions -> ok(Json.toJson(positions)), httpExecutionContext);
     }
 }

@@ -16,6 +16,7 @@
         </environment>
     </environments>
     <mappers>
+        <mapper resource="ShopPositions.xml" />
         <mapper class="models.AutoModelMapper"/>
         <mapper class="models.AutoMarkMapper"/>
         <mapper class="models.ShopPositionMapper"/>
